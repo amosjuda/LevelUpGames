@@ -1,8 +1,6 @@
 package org.amosjuda
 
-class Game {
-    var title = ""
-    var cover = ""
+data class Game (val title: String, val cover:String) {
     var description = ""
 
     override fun toString(): String {

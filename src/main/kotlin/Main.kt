@@ -1,5 +1,6 @@
 package org.amosjuda
 
+import com.google.gson.Gson
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -21,9 +22,9 @@ fun main() {
     val json = response?.body()
     println(json)
 
-    val myGame = Game()
-    myGame.title = "Batman: Arkham Asylum Game of the Year Edition"
-    myGame.cover = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/35140/capsule_sm_120.jpg?t=1745966724"
+    val gson = Gson()
+    val myInfoGame = gson.fromJson(json, InfoGame::class.java)
 
+    val myGame = Game(myInfoGame.info.title, myInfoGame.info.thumb)
     println(myGame)
 }
