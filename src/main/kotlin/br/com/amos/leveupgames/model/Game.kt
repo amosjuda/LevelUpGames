@@ -1,4 +1,4 @@
-package org.amosjuda
+package org.amosjuda.br.com.amos.leveupgames.model
 
 data class Game (val title: String, val cover: String) {
     var description:String? = null
