@@ -1,5 +1,7 @@
 package br.com.amos.leveupgames.model
 
+import org.amosjuda.br.com.amos.leveupgames.model.Game
+import java.util.Scanner
 import kotlin.random.Random
 
 data class Gamer(var name:String, var email:String) {
@@ -15,6 +17,8 @@ data class Gamer(var name:String, var email:String) {
     var internId:String? = null
         private set
 
+    val wantedGames = mutableListOf<Game?>()
+
     constructor(name:String, email:String, birthDate:String, user:String):
             this(name,email) {
                 this.birthDate = birthDate
@@ -22,15 +26,15 @@ data class Gamer(var name:String, var email:String) {
                 createInternId()
             }
 
-    init {
-        if(name.isNullOrBlank()){
-            throw IllegalArgumentException("The name is blank")
-        }
-        this.email = emailValidate()
-    }
+//    init {
+//        if(name.isNullOrBlank()){
+//            throw IllegalArgumentException("The name is blank")
+//        }
+//        this.email = emailValidate()
+//    }
 
     override fun toString(): String {
-        return "Gamer(name='$name', email='$email', birthDate=$birthDate, user=$user, internId=$internId)"
+        return "Gamer(name='$name', email='$email', birthDate=$birthDate, user=$user, internId=$internId)\n"
     }
 
     fun createInternId() {
@@ -46,6 +50,28 @@ data class Gamer(var name:String, var email:String) {
             return email
         } else {
             throw IllegalArgumentException("Invalid email")
+        }
+    }
+
+    companion object {
+        fun createGamer(sc: Scanner): Gamer {
+            println("Welcome to LevelUpGames! Let's register. Enter your name:")
+            val name = sc.nextLine()
+            println("Enter your email:")
+            val email = sc.nextLine()
+            println("Do you want to complete your registration with your username and date of birth? (Y/N)")
+            val option = sc.nextLine()
+
+            if(option.equals("s", true)){
+                println("Enter your date of birth (DD/MM/YYYY):")
+                val birthDate = sc.nextLine()
+                println("Enter your username:")
+                val user = sc.nextLine()
+
+                return Gamer(name, email, birthDate, user)
+            } else {
+                return Gamer(name, email)
+            }
         }
     }
 }
