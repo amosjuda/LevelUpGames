@@ -1,3 +1,5 @@
+package br.com.amos.leveupgames.main
+
 import br.com.amos.leveupgames.model.Gamer
 
 fun main(){

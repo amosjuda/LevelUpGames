@@ -6,7 +6,10 @@ import br.com.amos.leveupgames.utility.createGamer
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
-import org.amosjuda.br.com.amos.leveupgames.model.InfoGame
+import br.com.amos.leveupgames.model.Game
+import br.com.amos.leveupgames.model.InfoGameJson
+import br.com.amos.leveupgames.utility.createGame
+import br.com.amos.leveupgames.model.InfoGame
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -53,5 +56,18 @@ class ApiConsumption {
         }
 
         return convertedListGamer
+    }
+
+    fun searchGameJson(): List<Game> {
+        val address = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/jogos.json"
+        val json = dataConsumer(address)
+
+        val gson = Gson()
+        val myTypeGame = object : TypeToken<List<InfoGameJson>>() {}.type
+        val gameList: List<InfoGameJson> = gson.fromJson(json, myTypeGame)
+
+        val convertedGameList = gameList.map { infoGameJson -> infoGameJson.createGame() }
+
+        return convertedGameList
     }
 }

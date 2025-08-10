@@ -1,10 +1,10 @@
-package org.amosjuda.br.com.amos.leveupgames.main
+package br.com.amos.leveupgames.main
 
 import br.com.amos.leveupgames.model.Gamer
 import br.com.amos.leveupgames.services.ApiConsumption
 import com.google.gson.JsonSyntaxException
-import org.amosjuda.br.com.amos.leveupgames.model.Game
-import transformIntoAge
+import br.com.amos.leveupgames.model.Game
+import br.com.amos.leveupgames.utility.transformIntoAge
 import java.util.*
 
 fun main() {

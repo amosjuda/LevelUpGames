@@ -1,6 +1,5 @@
 package br.com.amos.leveupgames.model
 
-import org.amosjuda.br.com.amos.leveupgames.model.Game
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -26,13 +25,6 @@ data class Gamer(var name:String, var email:String) {
                 createInternId()
             }
 
-//    init {
-//        if(name.isNullOrBlank()){
-//            throw IllegalArgumentException("The name is blank")
-//        }
-//        this.email = emailValidate()
-//    }
-
     override fun toString(): String {
         return "Gamer(name='$name', email='$email', birthDate=$birthDate, user=$user, internId=$internId)\n"
     }
@@ -51,6 +43,10 @@ data class Gamer(var name:String, var email:String) {
         } else {
             throw IllegalArgumentException("Invalid email")
         }
+    }
+
+    fun gameRent(game: Game): Rent {
+        return Rent(this, game)
     }
 
     companion object {
