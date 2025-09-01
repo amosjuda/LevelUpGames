@@ -3,12 +3,20 @@ package br.com.amos.leveupgames.model
 class SignaturePlan(
     type: String,
     val monthlyFee: Double,
-    val includedGames: Int): Plan(type) {
+    val includedGames: Int,
+    val percentageDiscountReputation: Double): Plan(type) {
 
     override fun getValue(rent: Rent): Double {
         val totalGamesInTheMonth = rent.gamer.monthGames(rent.period.initialDate.monthValue).size+1
 
-        return if (totalGamesInTheMonth <= includedGames){ 0.0 }
-        else { super.getValue(rent) }
+        return if (totalGamesInTheMonth <= includedGames) {
+            0.0
+        } else {
+            var originalValue = super.getValue(rent)
+            if (rent.gamer.media > 8){
+                originalValue -= originalValue * percentageDiscountReputation
+            }
+            originalValue
+        }
     }
 }
