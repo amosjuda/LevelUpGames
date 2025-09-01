@@ -1,6 +1,7 @@
 package br.com.amos.leveupgames.main
 
 import br.com.amos.leveupgames.model.Period
+import br.com.amos.leveupgames.model.SignaturePlan
 import br.com.amos.leveupgames.services.ApiConsumption
 import java.time.LocalDate
 
@@ -28,4 +29,14 @@ fun main(){
     gamerCaroline?.gameRent(gameSpiderman, period2)
     gamerCaroline?.gameRent(gameTheLastofUsPartI, period3)
     println(gamerCaroline?.rentedGames)
+
+    val gamerCamila = gamersList.get(5)
+    gamerCamila?.plan = SignaturePlan("PRATA", 9.90, 3)
+
+    gamerCamila?.gameRent(gameResidentVillage, period1)
+    gamerCamila?.gameRent(gameSpiderman, period2)
+    gamerCamila?.gameRent(gameTheLastofUsPartI, period3)
+    gamerCamila?.gameRent(gameTheLastofUsPartI, period3)
+
+    println(gamerCamila?.rentedGames)
 }

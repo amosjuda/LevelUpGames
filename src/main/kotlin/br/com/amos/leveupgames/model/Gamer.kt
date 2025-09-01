@@ -1,6 +1,5 @@
 package br.com.amos.leveupgames.model
 
-import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -17,8 +16,15 @@ data class Gamer(var name:String, var email:String) {
     var internId:String? = null
         private set
 
+    var plan: Plan = LoosePlan("BRONZE")
     val wantedGames = mutableListOf<Game?>()
     val rentedGames = mutableListOf<Rent?>()
+
+    fun monthGames(mes:Int): List<Game> {
+        return rentedGames
+            .filter { rent ->  rent?.period?.initialDate?.monthValue == mes}
+            .map { rent -> rent?.game as Game }
+    }
 
     constructor(name:String, email:String, birthDate:String, user:String):
             this(name,email) {
