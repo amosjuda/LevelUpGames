@@ -20,6 +20,7 @@ data class Gamer(var name:String, var email:String): Recommended {
     val wantedGames = mutableListOf<Game?>()
     val rentedGames = mutableListOf<Rent?>()
     private val gradeLIst = mutableListOf<Int>()
+    val recommendedGames = mutableListOf<Game>()
 
     fun monthGames(mes:Int): List<Game> {
         return rentedGames
@@ -36,6 +37,11 @@ data class Gamer(var name:String, var email:String): Recommended {
         } else {
             gradeLIst.add(grade)
         }
+    }
+
+    fun recomendGame(game: Game, grade: Int) {
+        game.recommended(grade)
+        recommendedGames.add(game)
     }
 
     constructor(name:String, email:String, birthDate:String, user:String):
