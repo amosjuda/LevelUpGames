@@ -4,7 +4,8 @@ class SignaturePlan(
     type: String,
     val monthlyFee: Double,
     val includedGames: Int,
-    val percentageDiscountReputation: Double): Plan(type) {
+    val percentageDiscountReputation: Double,
+    id: Int = 0): Plan(type, id) {
 
     override fun getValue(rent: Rent): Double {
         val totalGamesInTheMonth = rent.gamer.monthGames(rent.period.initialDate.monthValue).size+1
@@ -18,5 +19,14 @@ class SignaturePlan(
             }
             originalValue
         }
+    }
+
+    override fun toString(): String {
+        return "Signature plan\n" +
+                "Type: $type\n" +
+                "Id: $id\n" +
+                "monthly fee: $monthlyFee\n" +
+                "Included Games: $includedGames\n" +
+                "Reputation Discount Percentage: $percentageDiscountReputation\n"
     }
 }

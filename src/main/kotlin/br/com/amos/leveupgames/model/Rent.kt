@@ -5,6 +5,7 @@ data class Rent(
     val game: Game,
     val period: Period) {
     val rentValue = gamer.plan.getValue(this)
+    var id = 0
 
     override fun toString(): String {
         return "${game.title} rented by ${gamer.name} for the value of R$ $rentValue \n"

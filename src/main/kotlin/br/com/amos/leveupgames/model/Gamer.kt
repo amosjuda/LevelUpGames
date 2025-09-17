@@ -13,6 +13,7 @@ data class Gamer(var name:String, var email:String): Recommended {
             }
         }
 
+    var id = 0
     var internId:String? = null
         private set
 
@@ -39,15 +40,16 @@ data class Gamer(var name:String, var email:String): Recommended {
         }
     }
 
-    fun recomendGame(game: Game, grade: Int) {
+    fun recommendGame(game: Game, grade: Int) {
         game.recommended(grade)
         recommendedGames.add(game)
     }
 
-    constructor(name:String, email:String, birthDate:String, user:String):
+    constructor(name:String, email:String, birthDate:String, user:String, id: Int = 0):
             this(name,email) {
                 this.birthDate = birthDate
                 this.user = user
+                this.id = id
                 createInternId()
             }
 
