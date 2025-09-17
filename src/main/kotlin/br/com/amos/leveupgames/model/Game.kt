@@ -1,10 +1,23 @@
 package br.com.amos.leveupgames.model
 
 import com.google.gson.annotations.Expose
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Table
 
-data class Game (@Expose val title: String?, @Expose val cover: String?): Recommended {
-    var description:String? = null
+@Entity
+@Table(name = "games")
+data class Game (@Expose var title: String? = null, @Expose var cover: String? = null): Recommended {
+    var description: String? = null
     var price = 0.0
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Int? = null
+
+    @Transient
     private val gradeList = mutableListOf<Int>()
 
     override val media: Double
@@ -13,17 +26,14 @@ data class Game (@Expose val title: String?, @Expose val cover: String?): Recomm
     override fun recommended(grade: Int) {
         gradeList.add(grade)
     }
-    constructor(title: String?, cover: String, price: Double, description: String):
-            this(title, cover) {
+
+    constructor(
+        title: String?,
+        cover: String?,
+        price: Double,
+        description: String?
+    ) : this(title, cover) {
         this.price = price
         this.description = description
     }
-
-    override fun toString(): String {
-        return "\nMy Game: \n" +
-                "Title: $title \n" +
-                "Cover: $cover \n" +
-                "Description: $description\n" +
-                "Price: $price\n" +
-                "Reputation: $media\n"
-    }   }
+}
