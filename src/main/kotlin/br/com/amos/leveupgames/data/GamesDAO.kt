@@ -1,20 +1,14 @@
 package br.com.amos.leveupgames.data
 
-import br.com.amos.leveupgames.data.DataBase.getEntityManager
 import br.com.amos.leveupgames.model.Game
+import javax.persistence.EntityManager
 
-class GamesDAO {
+class GamesDAO(val em: EntityManager) {
     fun getGames(): List<Game> {
-        val em = getEntityManager()
-        return try {
-            em.createQuery("SELECT g FROM Game g", Game::class.java).resultList
-        } finally {
-            em.close()
-        }
+        return em.createQuery("SELECT g FROM Game g", Game::class.java).resultList
     }
 
     fun addGame(game: Game) {
-        val em = getEntityManager()
         try {
             em.transaction.begin()
             em.persist(game)
@@ -24,8 +18,6 @@ class GamesDAO {
                 em.transaction.rollback()
             }
             throw e
-        } finally {
-            em.close()
         }
     }
 }
